@@ -1,5 +1,5 @@
 // script.js - versão corrigida e unificada
-const API_BASE = "http://localhost:3000"; // ajuste se for outro host
+const API_BASE = "https://serveragenda.vercel.app"; // ajuste se for outro host
 
 /* ----------------- CLIENT (index.html) ----------------- */
 const dataInput = document.getElementById("dataAgendamento");
