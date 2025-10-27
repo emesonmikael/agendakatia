@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kátia Manicure e Pedicure - Agendamento</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Kátia Manicure e Pedicure</h1>
+    <a href="admin.html" class="admin-link">Admin</a>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Agende seu horário</h2>
+      <label>Escolha a data:</label>
+      <input type="date" id="dataAgendamento">
+
+      <div id="slotsContainer"></div>
+    </div>
+
+    <div class="card" id="formContainer" style="display:none;">
+      <h3>Confirme seu agendamento</h3>
+      <input id="nomeCliente" placeholder="Seu nome completo" required>
+      <input id="telefoneCliente" placeholder="Seu telefone (WhatsApp)" required>
+      <input id="servicoCliente" placeholder="Serviço desejado (ex: Manicure, Pedicure)">
+      <button id="confirmarBtn">Confirmar Agendamento</button>
+    </div>
+
+    <div id="mensagem"></div>
+  </main>
+
+  <footer>
+    © 2025 Kátia Manicure e Pedicure
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
