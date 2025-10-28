@@ -4,16 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kátia Manicure e Pedicure – Agendamento Online</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { 
-        background: linear-gradient(135deg, #fff0f5 0%, #ffe6f2 100%); 
-        color: #333; 
-        min-height: 100vh;
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23ff99d6" opacity="0.1" d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30 Z"/></svg>');
-        background-size: 200px 200px;
-    }
+    body { background: linear-gradient(135deg, #fff0f5 0%, #ffe6f2 100%); color: #333; min-height: 100vh; }
 
     /* ======== CABEÇALHO ======== */
     header {
@@ -23,33 +16,16 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         color: white;
         position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .logo-container {
-        text-align: left;
-        flex: 1;
     }
 
     .logo {
-        font-size: 1.6em;
+        font-size: 1.8em;
         font-weight: bold;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     .slogan {
-        font-size: 0.9em;
+        font-size: 1em;
         opacity: 0.9;
     }
 
@@ -59,17 +35,20 @@
         border: none;
         padding: 10px 20px;
         border-radius: 50px;
-        font-size: 0.9em;
+        font-size: 1em;
         cursor: pointer;
         transition: 0.3s;
         font-weight: bold;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        white-space: nowrap;
     }
 
     header button:hover {
         background-color: #f0f0f0;
-        transform: scale(1.05);
+        transform: translateY(-50%) scale(1.05);
     }
 
     .container { 
@@ -84,18 +63,6 @@
         border-radius: 16px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         margin-bottom: 20px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #ff66b3 0%, #ff99d6 100%);
     }
 
     .card h2 { 
@@ -153,30 +120,6 @@
 
     .secondary-btn:hover {
         background: #5a6268 !important;
-    }
-
-    .success-btn {
-        background: #28a745 !important;
-    }
-
-    .success-btn:hover {
-        background: #218838 !important;
-    }
-
-    .danger-btn {
-        background: #dc3545 !important;
-    }
-
-    .danger-btn:hover {
-        background: #c82333 !important;
-    }
-
-    .whatsapp-btn {
-        background: #25D366 !important;
-    }
-
-    .whatsapp-btn:hover {
-        background: #128C7E !important;
     }
 
     .success {
@@ -331,41 +274,11 @@
         color: #856404;
     }
 
-    .action-buttons {
-        display: flex;
-        gap: 5px;
-        flex-wrap: wrap;
-    }
-
-    .action-buttons button {
-        padding: 6px 12px;
-        font-size: 0.8em;
-        width: auto;
-        margin: 0;
-    }
-
-    .service-icon {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .service-icon i {
-        font-size: 3em;
-        color: #ff66b3;
-        margin-bottom: 10px;
-    }
-
     @media (max-width: 600px) {
-        .header-content {
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .logo-container {
-            text-align: center;
-        }
-        
         header button {
+            position: static;
+            transform: none;
+            margin-top: 15px;
             width: 100%;
         }
         
@@ -384,37 +297,20 @@
         .tool-buttons button {
             width: 100%;
         }
-        
-        .action-buttons {
-            flex-direction: column;
-        }
-        
-        .action-buttons button {
-            width: 100%;
-        }
     }
 </style>
 </head>
 <body>
 
 <header>
-    <div class="header-content">
-        <div class="logo-container">
-            <div class="logo">Kátia Manicure e Pedicure</div>
-            <div class="slogan">Cuidando da sua beleza com carinho</div>
-        </div>
-        <button id="admin-btn">
-            <i class="fas fa-user-shield"></i> Área Administrativa
-        </button>
-    </div>
+    <div class="logo">Kátia Manicure e Pedicure</div>
+    <div class="slogan">Cuidando da sua beleza com carinho</div>
+    <button id="admin-btn">Área da Administradora</button>
 </header>
 
 <!-- ====== TELA CLIENTE ====== -->
 <div class="container" id="cliente-container">
     <div class="card">
-        <div class="service-icon">
-            <i class="fas fa-spa"></i>
-        </div>
         <h2>Agendar Horário</h2>
         
         <div class="info">
@@ -423,13 +319,13 @@
         </div>
         
         <form id="agendamento-form">
-            <label for="nome"><i class="fas fa-user"></i> Nome Completo:</label>
+            <label for="nome">Nome Completo:</label>
             <input type="text" id="nome" required placeholder="Seu nome completo">
             
-            <label for="telefone"><i class="fas fa-phone"></i> Telefone/WhatsApp:</label>
+            <label for="telefone">Telefone/WhatsApp:</label>
             <input type="tel" id="telefone" required placeholder="(XX) XXXXX-XXXX">
             
-            <label for="servico"><i class="fas fa-concierge-bell"></i> Serviço Desejado:</label>
+            <label for="servico">Serviço Desejado:</label>
             <select id="servico" required>
                 <option value="">Selecione o serviço</option>
                 <option value="Manicure">Manicure - R$ 25,00</option>
@@ -440,10 +336,10 @@
                 <option value="Outro">Outro serviço</option>
             </select>
 
-            <label for="data"><i class="fas fa-calendar"></i> Data Desejada:</label>
+            <label for="data">Data Desejada:</label>
             <input type="date" id="data" required>
             
-            <label for="horario"><i class="fas fa-clock"></i> Horário Preferencial:</label>
+            <label for="horario">Horário Preferencial:</label>
             <select id="horario" required>
                 <option value="">Selecione um horário</option>
                 <option value="08:00">08:00</option>
@@ -456,10 +352,10 @@
                 <option value="16:00">16:00</option>
             </select>
 
-            <label for="observacoes"><i class="fas fa-sticky-note"></i> Observações (opcional):</label>
+            <label for="observacoes">Observações (opcional):</label>
             <textarea id="observacoes" rows="3" placeholder="Alguma observação especial..."></textarea>
 
-            <input type="submit" value="📅 Solicitar Agendamento">
+            <input type="submit" value="Solicitar Agendamento">
         </form>
         
         <div class="success hidden" id="success-msg">
@@ -477,10 +373,10 @@
 <div class="container hidden" id="admin-container">
     <div class="card">
         <form id="login-form">
-            <h2><i class="fas fa-lock"></i> Acesso Administrativo</h2>
+            <h2>Acesso da Administradora</h2>
             <label for="senha">Senha:</label>
             <input type="password" id="senha" required placeholder="Digite a senha de acesso">
-            <input type="submit" value="🔑 Entrar no Painel">
+            <input type="submit" value="Entrar no Painel">
         </form>
 
         <div class="error hidden" id="login-error">
@@ -489,27 +385,27 @@
     </div>
 
     <div class="card hidden" id="admin-panel">
-        <h2><i class="fas fa-tachometer-alt"></i> Painel de Agendamentos 
+        <h2>Painel de Agendamentos 
             <span id="sync-status-admin" class="sync-status sync-online">✓ Online</span>
         </h2>
         
         <div class="admin-tools">
-            <h3><i class="fas fa-tools"></i> Ferramentas de Gestão</h3>
+            <h3>Ferramentas de Gestão</h3>
             <div class="tool-buttons">
-                <button id="atualizar-lista"><i class="fas fa-sync"></i> Atualizar Lista</button>
-                <button id="exportar-dados"><i class="fas fa-download"></i> Exportar Dados</button>
-                <button id="sincronizar-dados"><i class="fas fa-cloud-upload-alt"></i> Sincronizar Tudo</button>
+                <button id="atualizar-lista">🔄 Atualizar Lista</button>
+                <button id="exportar-dados">📊 Exportar Dados</button>
+                <button id="sincronizar-dados">🔄 Sincronizar Tudo</button>
             </div>
         </div>
 
         <div class="loading hidden" id="loading-agendamentos">
-            <i class="fas fa-spinner fa-spin"></i> Carregando agendamentos...
+            Carregando agendamentos...
         </div>
         
         <div id="lista-agendamentos">
-            <h3><i class="fas fa-list"></i> Agendamentos</h3>
+            <h3>Agendamentos Online</h3>
             <div id="contador-agendamentos" class="info">
-                <i class="fas fa-chart-bar"></i> Carregando...
+                Carregando...
             </div>
             <table id="agendamentos-table">
                 <thead>
@@ -534,22 +430,16 @@
 </div>
 
 <footer>
-    <div style="margin-bottom: 10px;">
-        <i class="fas fa-phone" style="color: #ff66b3;"></i> 
-        (11) 9XXXX-XXXX • 
-        <i class="fas fa-map-marker-alt" style="color: #ff66b3;"></i> 
-        Sua Localização
-    </div>
-    Kátia Manicure e Pedicure • Atendimento com qualidade e carinho
+    Kátia Manicure e Pedicure • Atendimento com qualidade e carinho • (11) 9XXXX-XXXX
 </footer>
 
 <script>
 // ====== CONFIGURAÇÃO DO GOOGLE SHEETS ======
+// SUBSTITUA esta URL pela URL do seu Google Apps Script
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfewwDOzkAWIMYsy9scr6D0c6j7R9dJHiMTkWV7BTYjLJAhs-1sPH8lKeIVV-iBawP/exec';
 
 // ====== CONFIGURAÇÕES ======
 const ADMIN_PASSWORD = "katia123";
-const WHATSAPP_NUMBER = "5584999558001"; // SUBSTITUA pelo seu número com DDD
 let agendamentos = [];
 let isOnline = true;
 
@@ -665,6 +555,7 @@ async function testarConexao() {
     try {
         const response = await fetch(GOOGLE_SCRIPT_URL + '?action=test');
         if (response.ok) {
+            const data = await response.json();
             isOnline = true;
             atualizarStatusConexao('✓ Online', 'sync-online');
         } else {
@@ -676,23 +567,28 @@ async function testarConexao() {
         console.log('Modo offline ativado. Dados salvos localmente.');
     }
 }
-
 async function salvarAgendamentoOnline(agendamento) {
     if (!isOnline) return;
     
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-            action: 'add',
-            data: agendamento
-        })
-    });
-    
-    if (!response.ok) {
-        throw new Error('Erro ao salvar online');
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: 'add',
+                data: agendamento
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Erro ao salvar online');
+        }
+        
+        const result = await response.json();
+        return result;
+    } catch (erro) {
+        console.error('Erro ao salvar online:', erro);
+        throw erro;
     }
-    
-    return await response.json();
 }
 
 async function carregarAgendamentosOnline() {
@@ -723,38 +619,6 @@ async function atualizarStatusOnline(agendamentoId, novoStatus) {
     
     return response.ok;
 }
-
-// ====== FUNÇÃO WHATSAPP ======
-
-function enviarWhatsApp(agendamento, confirmacao = true) {
-    // Formatar telefone (remover caracteres não numéricos)
-    const telefone = agendamento.telefone.replace(/\D/g, '');
-    
-    let mensagem = '';
-    
-    if (confirmacao) {
-        mensagem = `Olá ${agendamento.nome}! 😊%0A%0A` +
-                  `*CONFIRMAÇÃO DE AGENDAMENTO*%0A` +
-                  `Seu agendamento foi *CONFIRMADO*!%0A%0A` +
-                  `📅 *Data:* ${formatarData(agendamento.data)}%0A` +
-                  `⏰ *Horário:* ${agendamento.horario}%0A` +
-                  `💅 *Serviço:* ${agendamento.servico}%0A%0A` +
-                  `*Local:* [Sua Localização]%0A` +
-                  `*Valor:* [Valor do serviço]%0A%0A` +
-                  `Por favor, chegue 5 minutos antes do horário.%0A` +
-                  `Estou ansiosa para te atender! 💖%0A%0A` +
-                  `Atenciosamente,%0A*Kátia Manicure e Pedicure*`;
-    } else {
-        mensagem = `Olá ${agendamento.nome}!%0A%0A` +
-                  `Infelizmente preciso *CANCELAR* seu agendamento de ${formatarData(agendamento.data)} às ${agendamento.horario}.%0A%0A` +
-                  `Peço desculpas pelo inconveniente. Posso reagendar para outro horário?%0A%0A` +
-                  `Atenciosamente,%0A*Kátia Manicure e Pedicure*`;
-    }
-    
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensagem}`;
-    window.open(url, '_blank');
-}
-
 // ====== FUNÇÕES LOCAIS ======
 
 function carregarAgendamentosLocal() {
@@ -813,11 +677,10 @@ function atualizarTabelaAgendamentos() {
     const total = agendamentos.length;
     const pendentes = agendamentos.filter(a => a.status === 'Pendente').length;
     contadorAgendamentos.innerHTML = `
-        <i class="fas fa-chart-bar"></i> 
         <strong>Total:</strong> ${total} agendamentos | 
         <strong>Pendentes:</strong> ${pendentes} |
         <strong>Confirmados:</strong> ${total - pendentes}
-        ${!isOnline ? ' | <span style="color: #856404;"><i class="fas fa-wifi"></i> Modo Offline</span>' : ''}
+        ${!isOnline ? ' | <span style="color: #856404;">⚠ Modo Offline</span>' : ''}
     `;
     
     if (agendamentos.length === 0) {
@@ -829,13 +692,13 @@ function atualizarTabelaAgendamentos() {
         return;
     }
     
-    // Ordenar por data (mais recentes primeiro)
+            // Ordenar por data (mais recentes primeiro)
     agendamentos.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     
     agendamentos.forEach(agendamento => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><strong>${agendamento.nome}</strong></td>
+            <td>${agendamento.nome}</td>
             <td>${agendamento.telefone}</td>
             <td>${agendamento.servico}</td>
             <td>${formatarData(agendamento.data)}</td>
@@ -846,49 +709,18 @@ function atualizarTabelaAgendamentos() {
                 </span>
             </td>
             <td>
-                <div class="action-buttons">
-                    ${agendamento.status === 'Pendente' ? `
-                        <button onclick="confirmarAgendamento('${agendamento.id}')" class="success-btn">
-                            <i class="fas fa-check"></i> Confirmar
-                        </button>
-                    ` : ''}
-                    <button onclick="enviarWhatsApp(${JSON.stringify(agendamento).replace(/"/g, '&quot;')}, ${agendamento.status === 'Confirmado'})" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button onclick="alterarStatus('${agendamento.id}', 'cancelado')" class="danger-btn">
-                        <i class="fas fa-times"></i> Cancelar
-                    </button>
-                </div>
+                <button onclick="alterarStatus('${agendamento.id}', 'confirmado')" 
+                        class="secondary-btn" style="padding: 5px 10px; font-size: 0.8em;">
+                    ✅
+                </button>
+                <button onclick="alterarStatus('${agendamento.id}', 'cancelado')" 
+                        style="background: #dc3545; padding: 5px 10px; font-size: 0.8em;">
+                    ❌
+                </button>
             </td>
         `;
         agendamentosTable.appendChild(tr);
     });
-}
-
-async function confirmarAgendamento(id) {
-    const agendamento = agendamentos.find(a => a.id === id);
-    if (agendamento) {
-        agendamento.status = 'Confirmado';
-        
-        // Salvar localmente
-        salvarAgendamentosLocal();
-        
-        // Tentar salvar online
-        if (isOnline) {
-            try {
-                await atualizarStatusOnline(id, 'Confirmado');
-            } catch (erro) {
-                console.error('Erro ao salvar online:', erro);
-            }
-        }
-        
-        atualizarTabelaAgendamentos();
-        
-        // Abrir WhatsApp para enviar confirmação
-        enviarWhatsApp(agendamento, true);
-        
-        mostrarMensagem(`Agendamento de ${agendamento.nome} confirmado! WhatsApp aberto.`, 'success');
-    }
 }
 
 async function alterarStatus(id, novoStatus) {
@@ -904,19 +736,16 @@ async function alterarStatus(id, novoStatus) {
         if (isOnline) {
             try {
                 await atualizarStatusOnline(id, agendamento.status);
+                mostrarMensagem(`Status atualizado online para: ${agendamento.status}`, 'success');
             } catch (erro) {
-                console.error('Erro ao salvar online:', erro);
+                mostrarMensagem(`Status salvo localmente. Erro ao sincronizar.`, 'warning');
             }
         }
         
         atualizarTabelaAgendamentos();
         
-        // Se foi cancelado, abrir WhatsApp para notificar
-        if (novoStatus === 'cancelado') {
-            enviarWhatsApp(agendamento, false);
-        }
-        
-        mostrarMensagem(`Status de ${agendamento.nome} alterado para ${agendamento.status}`, 'success');
+        // Aqui você pode adicionar integração com WhatsApp para notificar o cliente
+        alert(`Status do agendamento de ${agendamento.nome} alterado para ${agendamento.status}`);
     }
 }
 
@@ -999,11 +828,19 @@ function mostrarMensagem(mensagem, tipo) {
     errorMsg.classList.add('hidden');
     
     const elemento = tipo === 'success' ? successMsg : 
-                    tipo === 'error' ? errorMsg : null;
+                    tipo === 'error' ? errorMsg : 
+                    tipo === 'warning' ? document.createElement('div') : null;
     
     if (elemento) {
         elemento.textContent = mensagem;
+        elemento.className = tipo === 'success' ? 'success' : 
+                           tipo === 'error' ? 'error' : 'warning';
         elemento.classList.remove('hidden');
+        
+        if (tipo === 'warning') {
+            elemento.style.display = 'block';
+            agendamentoForm.parentNode.insertBefore(elemento, agendamentoForm);
+        }
         
         setTimeout(() => {
             elemento.classList.add('hidden');
@@ -1017,6 +854,29 @@ function atualizarStatusConexao(texto, classe) {
     syncStatusAdmin.textContent = texto;
     syncStatusAdmin.className = 'sync-status ' + classe;
 }
+
+// ====== INSTRUÇÕES DE CONFIGURAÇÃO ======
+console.log(`
+=== CONFIGURAÇÃO DO GOOGLE SHEETS ===
+
+PARA CONFIGURAR:
+
+1. CRIE A PLANILHA:
+   - Acesse: https://sheets.google.com
+   - Crie nova planilha "Agendamentos Katia"
+   - Colunas: Nome, Telefone, Serviço, Data, Horário, Observações, Status, Timestamp
+
+2. CRIE O GOOGLE APPS SCRIPT:
+   - Acesse: https://script.google.com
+   - Novo projeto → Cole o código do script (fornecido separadamente)
+   - Publique como aplicação web
+
+3. CONFIGURE O SCRIPT:
+   - Substitua GOOGLE_SCRIPT_URL no código pela URL do seu Apps Script
+   - Configure o acesso: "Executar como: Eu" e "Quem tem acesso: Qualquer um"
+
+O sistema funcionará em modo offline como fallback!
+`);
 </script>
 
 </body>
