@@ -1108,60 +1108,61 @@ function atualizarTabelaAgendamentos() {
         const isPendente = (agendamento.status || 'Pendente') === 'Pendente';
         const statusClass = `status-${(agendamento.status || 'Pendente').toLowerCase()}`;
         
-        html += `
-            <div class="agendamento-card ${statusClass}">
-                <div class="card-header">
-                    <div class="cliente-info">
-                        <h4><i class="fas fa-user"></i> ${agendamento.nome || 'N/A'}</h4>
-                        <span class="telefone"><i class="fas fa-phone"></i> ${agendamento.telefone || 'N/A'}</span>
-                    </div>
-                    <div class="status-badge ${statusClass}">
-                        ${agendamento.status || 'Pendente'}
-                    </div>
+       html += `
+    <div class="agendamento-card ${statusClass}">
+        <div class="card-header">
+            <div class="cliente-info">
+                <h4><i class="fas fa-user"></i> ${agendamento.nome || 'N/A'}</h4>
+                <span class="telefone"><i class="fas fa-phone"></i> ${agendamento.telefone || 'N/A'}</span>
+            </div>
+            <div class="status-badge ${statusClass}">
+                ${agendamento.status || 'Pendente'}
+            </div>
+        </div>
+        
+        <div class="card-content">
+            <div class="info-row">
+                <div class="info-item">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>${agendamento.servico || 'N/A'}</span>
                 </div>
-                
-                <div class="card-content">
-                    <div class="info-row">
-                        <div class="info-item">
-                            <i class="fas fa-concierge-bell"></i>
-                            <span>${agendamento.servico || 'N/A'}</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>${formatarData(agendamento.data) || 'N/A'}</span>
-                        </div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <span>${agendamento.horario || 'N/A'}</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-sticky-note"></i>
-                            <span>${agendamento.observacoes || 'Sem observações'}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card-actions">
-                    ${isPendente ? `
-                        <button onclick="confirmarAgendamento('${agendamento.id}')" class="success-btn">
-                            <i class="fas fa-check"></i> Confirmar
-                        </button>
-                    ` : ''}
-                    <button onclick="enviarWhatsApp(${JSON.stringify(agendamento).replace(/"/g, '&quot;')}, ${!isPendente})" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button onclick="alterarStatus('${agendamento.id}', 'cancelado')" class="danger-btn">
-                        <i class="fas fa-times"></i> ${isPendente ? 'Recusar' : 'Cancelar'}
-                    </button>
-                </div>
-                
-                <div class="card-footer">
-                    <small><i class="fas fa-history"></i> Solicitado em: ${formatarDataHora(agendamento.timestamp)}</small>
+                <div class="info-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>${formatarData(agendamento.data) || 'N/A'}</span>
                 </div>
             </div>
-        `;
+            <div class="info-row">
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>${agendamento.horario || 'N/A'}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>${agendamento.observacoes || 'Sem observações'}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-actions">
+            ${isPendente ? `
+                <button onclick="confirmarAgendamento('${agendamento.id}')" class="success-btn">
+                    <i class="fas fa-check"></i> Confirmar
+                </button>
+            ` : ''}
+            <button onclick="enviarWhatsApp(${JSON.stringify(agendamento).replace(/"/g, '&quot;')}, ${!isPendente})" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+            <button onclick="alterarStatus('${agendamento.id}', 'cancelado')" class="danger-btn">
+                <i class="fas fa-times"></i> ${isPendente ? 'Recusar' : 'Cancelar'}
+            </button>
+        </div>
+        
+        <div class="card-footer">
+            <small><i class="fas fa-history"></i> Solicitado em: ${formatarDataHora(agendamento.timestamp)}</small>
+        </div>
+    </div>
+`;
+
     });
     
     html += '</div>';
@@ -1169,9 +1170,19 @@ function atualizarTabelaAgendamentos() {
 }
 
 async function confirmarAgendamento(id) {
-    console.log('Confirmando agendamento:', id);
+    console.log('Confirmando agendamento ID:', id);
+    console.log('Tipo do ID:', typeof id);
     
-    const agendamento = agendamentos.find(a => a.id === id);
+    // CORREÇÃO: Converter ID para string para garantir a comparação
+    const idString = id.toString();
+    console.log('IDs disponíveis:', agendamentos.map(a => ({ id: a.id, tipo: typeof a.id })));
+    
+    const agendamento = agendamentos.find(a => {
+        // CORREÇÃO: Comparar ambos como strings
+        const agendamentoId = a.id ? a.id.toString() : '';
+        return agendamentoId === idString;
+    });
+    
     if (agendamento) {
         console.log('Agendamento encontrado:', agendamento);
         
@@ -1183,7 +1194,7 @@ async function confirmarAgendamento(id) {
         // Tentar salvar online
         if (isOnline) {
             try {
-                await atualizarStatusOnline(id, 'Confirmado');
+                await atualizarStatusOnline(idString, 'Confirmado');
                 console.log('Status atualizado online');
             } catch (erro) {
                 console.error('Erro ao salvar online:', erro);
@@ -1198,13 +1209,24 @@ async function confirmarAgendamento(id) {
         
         mostrarMensagem(`Agendamento de ${agendamento.nome} confirmado! WhatsApp aberto.`, 'success');
     } else {
-        console.error('Agendamento não encontrado para ID:', id);
+        console.error('Agendamento não encontrado para ID:', idString);
+        console.error('IDs disponíveis:', agendamentos.map(a => a.id));
         mostrarMensagem('Erro: Agendamento não encontrado', 'error');
     }
 }
 
+
 async function alterarStatus(id, novoStatus) {
-    const agendamento = agendamentos.find(a => a.id === id);
+    console.log('Alterando status do agendamento ID:', id);
+    
+    // CORREÇÃO: Converter ID para string para garantir a comparação
+    const idString = id.toString();
+    
+    const agendamento = agendamentos.find(a => {
+        const agendamentoId = a.id ? a.id.toString() : '';
+        return agendamentoId === idString;
+    });
+    
     if (agendamento) {
         const statusAntigo = agendamento.status;
         agendamento.status = novoStatus === 'confirmado' ? 'Confirmado' : 'Cancelado';
@@ -1215,7 +1237,7 @@ async function alterarStatus(id, novoStatus) {
         // Tentar salvar online
         if (isOnline) {
             try {
-                await atualizarStatusOnline(id, agendamento.status);
+                await atualizarStatusOnline(idString, agendamento.status);
             } catch (erro) {
                 console.error('Erro ao salvar online:', erro);
             }
@@ -1229,6 +1251,8 @@ async function alterarStatus(id, novoStatus) {
         }
         
         mostrarMensagem(`Status de ${agendamento.nome} alterado para ${agendamento.status}`, 'success');
+    } else {
+        console.error('Agendamento não encontrado para alteração de status:', idString);
     }
 }
 
