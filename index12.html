@@ -54,8 +54,8 @@
     }
 
     header button {
-        background-color: white;
-        color: #ff66b3;
+        background-color: #ffffff;
+        color: #f5f1f3;
         border: none;
         padding: 10px 20px;
         border-radius: 50px;
@@ -179,14 +179,6 @@
         background: #128C7E !important;
     }
 
-    .clean-btn {
-        background: #ff6b6b !important;
-    }
-
-    .clean-btn:hover {
-        background: #ee5a5a !important;
-    }
-
     .success {
         background: #e8f7ef;
         color: #2d8f5a;
@@ -227,117 +219,33 @@
         border-left: 4px solid #ffc107;
     }
 
-    /* ====== CARDS EM LISTA ====== */
-    .agendamentos-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+    table {
+        width: 100%;
+        border-collapse: collapse;
         margin-top: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border-radius: 10px;
+        overflow: hidden;
     }
 
-    .agendamento-card {
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        border-left: 4px solid #ff66b3;
-        transition: transform 0.2s, box-shadow 0.2s;
+    th, td {
+        border: 1px solid #eee;
+        padding: 12px 15px;
+        text-align: left;
     }
 
-    .agendamento-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    th {
+        background: linear-gradient(90deg, #ff66b3 0%, #ff99d6 100%);
+        color: white;
+        font-weight: 600;
     }
 
-    .agendamento-card.status-pendente {
-        border-left-color: #ffc107;
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
     }
 
-    .agendamento-card.status-confirmado {
-        border-left-color: #28a745;
-    }
-
-    .agendamento-card.status-cancelado {
-        border-left-color: #dc3545;
-    }
-
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 15px;
-    }
-
-    .cliente-info h4 {
-        margin: 0 0 5px 0;
-        color: #333;
-        font-size: 1.1em;
-    }
-
-    .telefone {
-        color: #666;
-        font-size: 0.9em;
-    }
-
-    .card-content {
-        margin-bottom: 15px;
-    }
-
-    .info-row {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 10px;
-    }
-
-    .info-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex: 1;
-        font-size: 0.9em;
-    }
-
-    .info-item i {
-        color: #ff66b3;
-        width: 16px;
-    }
-
-    .card-actions {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 10px;
-        flex-wrap: wrap;
-    }
-
-    .card-actions button {
-        padding: 8px 12px;
-        font-size: 0.8em;
-        width: auto;
-        margin: 0;
-        flex: 1;
-        min-width: 100px;
-    }
-
-    .card-footer {
-        border-top: 1px solid #eee;
-        padding-top: 10px;
-        text-align: center;
-    }
-
-    .card-footer small {
-        color: #888;
-        font-size: 0.8em;
-    }
-
-    .no-data {
-        text-align: center;
-        padding: 40px 20px;
-        color: #666;
-    }
-
-    .no-data h3 {
-        margin: 15px 0 10px 0;
-        color: #333;
+    tr:hover {
+        background-color: #f0f0f0;
     }
 
     .admin-tools {
@@ -423,25 +331,17 @@
         color: #856404;
     }
 
-    .clean-confirm {
-        background: #fff3cd;
-        border: 2px solid #ffc107;
-        padding: 20px;
-        border-radius: 10px;
-        margin: 20px 0;
-        text-align: center;
-    }
-
-    .clean-confirm-buttons {
+    .action-buttons {
         display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin-top: 15px;
+        gap: 5px;
+        flex-wrap: wrap;
     }
 
-    .clean-confirm-buttons button {
+    .action-buttons button {
+        padding: 6px 12px;
+        font-size: 0.8em;
         width: auto;
-        padding: 10px 20px;
+        margin: 0;
     }
 
     .service-icon {
@@ -455,7 +355,6 @@
         margin-bottom: 10px;
     }
 
-    /* Ajustes para mobile */
     @media (max-width: 600px) {
         .header-content {
             flex-direction: column;
@@ -486,33 +385,11 @@
             width: 100%;
         }
         
-        .info-row {
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .card-actions {
+        .action-buttons {
             flex-direction: column;
         }
         
-        .card-actions button {
-            width: 100%;
-        }
-        
-        .card-header {
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .status-badge {
-            align-self: flex-start;
-        }
-
-        .clean-confirm-buttons {
-            flex-direction: column;
-        }
-
-        .clean-confirm-buttons button {
+        .action-buttons button {
             width: 100%;
         }
     }
@@ -622,27 +499,6 @@
                 <button id="atualizar-lista"><i class="fas fa-sync"></i> Atualizar Lista</button>
                 <button id="exportar-dados"><i class="fas fa-download"></i> Exportar Dados</button>
                 <button id="sincronizar-dados"><i class="fas fa-cloud-upload-alt"></i> Sincronizar Tudo</button>
-                <button id="limpar-dados" class="clean-btn"><i class="fas fa-trash"></i> Limpar Tudo</button>
-            </div>
-        </div>
-
-        <!-- Área de confirmação para limpar dados -->
-        <div class="clean-confirm hidden" id="clean-confirm">
-            <h4><i class="fas fa-exclamation-triangle"></i> ATENÇÃO!</h4>
-            <p>Tem certeza que deseja <strong>APAGAR TODOS OS DADOS</strong>?</p>
-            <p>Esta ação não pode ser desfeita e irá remover:</p>
-            <ul style="text-align: left; margin: 10px 0;">
-                <li>Todos os agendamentos salvos localmente</li>
-                <li>Todos os dados do navegador</li>
-                <li>O histórico completo</li>
-            </ul>
-            <div class="clean-confirm-buttons">
-                <button id="confirmar-limpeza" class="danger-btn">
-                    <i class="fas fa-check"></i> SIM, APAGAR TUDO
-                </button>
-                <button id="cancelar-limpeza" class="secondary-btn">
-                    <i class="fas fa-times"></i> Cancelar
-                </button>
             </div>
         </div>
 
@@ -651,7 +507,28 @@
         </div>
         
         <div id="lista-agendamentos">
-            <!-- OS CARDS SERÃO INSERIDOS AQUI PELO JAVASCRIPT -->
+            <h3><i class="fas fa-list"></i> Agendamentos</h3>
+            <div id="contador-agendamentos" class="info">
+                <i class="fas fa-chart-bar"></i> Carregando...
+            </div>
+            <table id="agendamentos-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Serviço</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;">Carregando agendamentos...</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -672,7 +549,7 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfewwDOzkAWI
 
 // ====== CONFIGURAÇÕES ======
 const ADMIN_PASSWORD = "katia123";
-const WHATSAPP_NUMBER = "5511999999999"; // SUBSTITUA pelo seu número com DDD
+const WHATSAPP_NUMBER = "5584999558001"; // SUBSTITUA pelo seu número com DDD
 let agendamentos = [];
 let isOnline = true;
 
@@ -686,13 +563,10 @@ const successMsg = document.getElementById('success-msg');
 const errorMsg = document.getElementById('error-msg');
 const loginError = document.getElementById('login-error');
 const loadingAgendamentos = document.getElementById('loading-agendamentos');
+const agendamentosTable = document.querySelector('#agendamentos-table tbody');
 const contadorAgendamentos = document.getElementById('contador-agendamentos');
 const syncStatusClient = document.getElementById('sync-status-client');
 const syncStatusAdmin = document.getElementById('sync-status-admin');
-const cleanConfirm = document.getElementById('clean-confirm');
-const limparDadosBtn = document.getElementById('limpar-dados');
-const confirmarLimpezaBtn = document.getElementById('confirmar-limpeza');
-const cancelarLimpezaBtn = document.getElementById('cancelar-limpeza');
 
 // ====== INICIALIZAÇÃO ======
 document.addEventListener('DOMContentLoaded', function() {
@@ -785,34 +659,6 @@ agendamentoForm.addEventListener('submit', async e => {
     }
 });
 
-// ====== FUNÇÕES DE LIMPEZA DE DADOS ======
-
-limparDadosBtn.addEventListener('click', () => {
-    cleanConfirm.classList.remove('hidden');
-});
-
-confirmarLimpezaBtn.addEventListener('click', () => {
-    // Limpar dados locais
-    agendamentos = [];
-    localStorage.removeItem('agendamentosKatia');
-    
-    // Limpar dados online (se possível)
-    if (isOnline) {
-        // Aqui você pode adicionar uma função para limpar o Google Sheets também
-        console.log('Dados online mantidos por segurança');
-    }
-    
-    // Atualizar interface
-    atualizarTabelaAgendamentos();
-    cleanConfirm.classList.add('hidden');
-    
-    mostrarMensagem('Todos os dados locais foram apagados com sucesso!', 'success');
-});
-
-cancelarLimpezaBtn.addEventListener('click', () => {
-    cleanConfirm.classList.add('hidden');
-});
-
 // ====== FUNÇÕES DO GOOGLE SHEETS ======
 
 async function testarConexao() {
@@ -860,34 +706,7 @@ async function carregarAgendamentosOnline() {
     }
     
     const data = await response.json();
-    console.log('Dados recebidos do Google Sheets:', data);
-    
-    // CORREÇÃO: Processar os dados corretamente
-    let agendamentosProcessados = [];
-    
-    if (data && data.data && data.data.agendamentos) {
-        agendamentosProcessados = data.data.agendamentos;
-    } else if (data && data.agendamentos) {
-        agendamentosProcessados = data.agendamentos;
-    } else if (Array.isArray(data)) {
-        agendamentosProcessados = data;
-    } else {
-        console.error('Estrutura de dados inesperada:', data);
-        return [];
-    }
-    
-    // CORREÇÃO: Formatar datas corretamente
-    return agendamentosProcessados.map(agendamento => ({
-        id: agendamento.id || '',
-        nome: agendamento.nome || '',
-        telefone: agendamento.telefone ? agendamento.telefone.toString() : '',
-        servico: agendamento.servico || '',
-        data: formatarDataParaInput(agendamento.data),
-        horario: formatarHorario(agendamento.horario),
-        observacoes: agendamento.observacoes || '',
-        status: agendamento.status || 'Pendente',
-        timestamp: agendamento.timestamp || new Date().toISOString()
-    }));
+    return data.data.agendamentos || [];
 }
 
 async function atualizarStatusOnline(agendamentoId, novoStatus) {
@@ -903,79 +722,6 @@ async function atualizarStatusOnline(agendamentoId, novoStatus) {
     });
     
     return response.ok;
-}
-
-// ====== FUNÇÕES DE FORMATAÇÃO ======
-
-function formatarDataParaInput(dataString) {
-    if (!dataString) return '';
-    
-    try {
-        // Se já estiver no formato YYYY-MM-DD, retorna direto
-        if (/^\d{4}-\d{2}-\d{2}$/.test(dataString)) {
-            return dataString;
-        }
-        
-        // Se for uma data completa, extrai apenas a parte da data
-        const data = new Date(dataString);
-        if (isNaN(data.getTime())) {
-            return '';
-        }
-        
-        const ano = data.getFullYear();
-        const mes = String(data.getMonth() + 1).padStart(2, '0');
-        const dia = String(data.getDate()).padStart(2, '0');
-        
-        return `${ano}-${mes}-${dia}`;
-    } catch (e) {
-        console.error('Erro ao formatar data:', e);
-        return '';
-    }
-}
-
-function formatarHorario(horarioString) {
-    if (!horarioString) return '';
-    
-    try {
-        // Se já estiver no formato HH:MM, retorna direto
-        if (/^\d{2}:\d{2}$/.test(horarioString)) {
-            return horarioString;
-        }
-        
-        // Se for uma data/hora completa, extrai apenas o horário
-        const data = new Date(horarioString);
-        if (isNaN(data.getTime())) {
-            return '';
-        }
-        
-        const horas = String(data.getHours()).padStart(2, '0');
-        const minutos = String(data.getMinutes()).padStart(2, '0');
-        
-        return `${horas}:${minutos}`;
-    } catch (e) {
-        console.error('Erro ao formatar horário:', e);
-        return '';
-    }
-}
-
-function formatarData(dataString) {
-    if (!dataString) return 'N/A';
-    try {
-        const data = new Date(dataString + 'T00:00:00');
-        return data.toLocaleDateString('pt-BR');
-    } catch (e) {
-        return dataString;
-    }
-}
-
-function formatarDataHora(dataString) {
-    if (!dataString) return 'N/A';
-    try {
-        const data = new Date(dataString);
-        return data.toLocaleString('pt-BR');
-    } catch (e) {
-        return dataString;
-    }
 }
 
 // ====== FUNÇÃO WHATSAPP ======
@@ -1040,8 +786,6 @@ async function carregarAgendamentosAdmin() {
         if (isOnline) {
             // Tentar carregar do servidor online
             const dadosOnline = await carregarAgendamentosOnline();
-            console.log('Dados online carregados:', dadosOnline);
-            
             if (dadosOnline && dadosOnline.length > 0) {
                 agendamentos = dadosOnline;
                 salvarAgendamentosLocal();
@@ -1049,22 +793,13 @@ async function carregarAgendamentosAdmin() {
             }
         }
         
-        // CORREÇÃO: Garantir que a função existe e é chamada
-        if (typeof atualizarTabelaAgendamentos === 'function') {
-            atualizarTabelaAgendamentos();
-        } else {
-            console.error('Função atualizarTabelaAgendamentos não encontrada');
-        }
+        atualizarTabelaAgendamentos();
         
     } catch (erro) {
         console.error('Erro ao carregar online:', erro);
         // Usar dados locais em caso de erro
         carregarAgendamentosLocal();
-        
-        if (typeof atualizarTabelaAgendamentos === 'function') {
-            atualizarTabelaAgendamentos();
-        }
-        
+        atualizarTabelaAgendamentos();
         mostrarMensagem('Usando dados locais. Sem conexão com servidor.', 'warning');
     }
     
@@ -1072,29 +807,24 @@ async function carregarAgendamentosAdmin() {
 }
 
 function atualizarTabelaAgendamentos() {
-    const listaAgendamentos = document.getElementById('lista-agendamentos');
-    const contadorElement = document.getElementById('contador-agendamentos');
+    agendamentosTable.innerHTML = '';
     
-    // CORREÇÃO: Verificar se o elemento existe antes de usar
-    if (contadorElement) {
-        const total = agendamentos.length;
-        const pendentes = agendamentos.filter(a => a.status === 'Pendente').length;
-        contadorElement.innerHTML = `
-            <i class="fas fa-chart-bar"></i> 
-            <strong>Total:</strong> ${total} agendamentos | 
-            <strong>Pendentes:</strong> ${pendentes} |
-            <strong>Confirmados:</strong> ${total - pendentes}
-            ${!isOnline ? ' | <span style="color: #856404;"><i class="fas fa-wifi"></i> Modo Offline</span>' : ''}
-        `;
-    }
+    // Atualizar contador
+    const total = agendamentos.length;
+    const pendentes = agendamentos.filter(a => a.status === 'Pendente').length;
+    contadorAgendamentos.innerHTML = `
+        <i class="fas fa-chart-bar"></i> 
+        <strong>Total:</strong> ${total} agendamentos | 
+        <strong>Pendentes:</strong> ${pendentes} |
+        <strong>Confirmados:</strong> ${total - pendentes}
+        ${!isOnline ? ' | <span style="color: #856404;"><i class="fas fa-wifi"></i> Modo Offline</span>' : ''}
+    `;
     
     if (agendamentos.length === 0) {
-        listaAgendamentos.innerHTML = `
-            <div class="no-data">
-                <i class="fas fa-calendar-times" style="font-size: 3em; color: #ccc; margin-bottom: 15px;"></i>
-                <h3>Nenhum agendamento encontrado</h3>
-                <p>Quando houver agendamentos, eles aparecerão aqui.</p>
-            </div>
+        agendamentosTable.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align: center;">Nenhum agendamento encontrado</td>
+            </tr>
         `;
         return;
     }
@@ -1102,79 +832,42 @@ function atualizarTabelaAgendamentos() {
     // Ordenar por data (mais recentes primeiro)
     agendamentos.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     
-    let html = '<div class="agendamentos-grid">';
-    
     agendamentos.forEach(agendamento => {
-        const isPendente = (agendamento.status || 'Pendente') === 'Pendente';
-        const statusClass = `status-${(agendamento.status || 'Pendente').toLowerCase()}`;
-        
-        html += `
-            <div class="agendamento-card ${statusClass}">
-                <div class="card-header">
-                    <div class="cliente-info">
-                        <h4><i class="fas fa-user"></i> ${agendamento.nome || 'N/A'}</h4>
-                        <span class="telefone"><i class="fas fa-phone"></i> ${agendamento.telefone || 'N/A'}</span>
-                    </div>
-                    <div class="status-badge ${statusClass}">
-                        ${agendamento.status || 'Pendente'}
-                    </div>
-                </div>
-                
-                <div class="card-content">
-                    <div class="info-row">
-                        <div class="info-item">
-                            <i class="fas fa-concierge-bell"></i>
-                            <span>${agendamento.servico || 'N/A'}</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>${formatarData(agendamento.data) || 'N/A'}</span>
-                        </div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <span>${agendamento.horario || 'N/A'}</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-sticky-note"></i>
-                            <span>${agendamento.observacoes || 'Sem observações'}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card-actions">
-                    ${isPendente ? `
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${agendamento.nome}</strong></td>
+            <td>${agendamento.telefone}</td>
+            <td>${agendamento.servico}</td>
+            <td>${formatarData(agendamento.data)}</td>
+            <td>${agendamento.horario}</td>
+            <td>
+                <span class="status-badge status-${agendamento.status.toLowerCase()}">
+                    ${agendamento.status}
+                </span>
+            </td>
+            <td>
+                <div class="action-buttons">
+                    ${agendamento.status === 'Pendente' ? `
                         <button onclick="confirmarAgendamento('${agendamento.id}')" class="success-btn">
                             <i class="fas fa-check"></i> Confirmar
                         </button>
                     ` : ''}
-                    <button onclick="enviarWhatsApp(${JSON.stringify(agendamento).replace(/"/g, '&quot;')}, ${!isPendente})" class="whatsapp-btn">
+                    <button onclick="enviarWhatsApp(${JSON.stringify(agendamento).replace(/"/g, '&quot;')}, ${agendamento.status === 'Confirmado'})" class="whatsapp-btn">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </button>
                     <button onclick="alterarStatus('${agendamento.id}', 'cancelado')" class="danger-btn">
-                        <i class="fas fa-times"></i> ${isPendente ? 'Recusar' : 'Cancelar'}
+                        <i class="fas fa-times"></i> Cancelar
                     </button>
                 </div>
-                
-                <div class="card-footer">
-                    <small><i class="fas fa-history"></i> Solicitado em: ${formatarDataHora(agendamento.timestamp)}</small>
-                </div>
-            </div>
+            </td>
         `;
+        agendamentosTable.appendChild(tr);
     });
-    
-    html += '</div>';
-    listaAgendamentos.innerHTML = html;
 }
 
 async function confirmarAgendamento(id) {
-    console.log('Confirmando agendamento:', id);
-    
     const agendamento = agendamentos.find(a => a.id === id);
     if (agendamento) {
-        console.log('Agendamento encontrado:', agendamento);
-        
         agendamento.status = 'Confirmado';
         
         // Salvar localmente
@@ -1184,22 +877,17 @@ async function confirmarAgendamento(id) {
         if (isOnline) {
             try {
                 await atualizarStatusOnline(id, 'Confirmado');
-                console.log('Status atualizado online');
             } catch (erro) {
                 console.error('Erro ao salvar online:', erro);
             }
         }
         
-        // Atualizar interface
         atualizarTabelaAgendamentos();
         
         // Abrir WhatsApp para enviar confirmação
         enviarWhatsApp(agendamento, true);
         
         mostrarMensagem(`Agendamento de ${agendamento.nome} confirmado! WhatsApp aberto.`, 'success');
-    } else {
-        console.error('Agendamento não encontrado para ID:', id);
-        mostrarMensagem('Erro: Agendamento não encontrado', 'error');
     }
 }
 
@@ -1299,6 +987,11 @@ document.getElementById('sincronizar-dados').addEventListener('click', async () 
 });
 
 // ====== FUNÇÕES AUXILIARES ======
+
+function formatarData(dataString) {
+    const data = new Date(dataString + 'T00:00:00');
+    return data.toLocaleDateString('pt-BR');
+}
 
 function mostrarMensagem(mensagem, tipo) {
     // Limpar mensagens anteriores
