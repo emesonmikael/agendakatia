@@ -668,7 +668,7 @@
 
 <script>
 // ====== CONFIGURAÇÃO DO GOOGLE SHEETS ======
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfewwDOzkAWIMYsy9scr6D0c6j7R9dJHiMTkWV7BTYjLJAhs-1sPH8lKeIVV-iBawP/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfwiJ8d1kba1JjWNGZDiRsmu2RMfq9Mw9ORwXnoiK7wLa5nGWgwwZ0-LN8N6l4pilR/exec';
 
 // ====== CONFIGURAÇÕES ======
 const ADMIN_PASSWORD = "katia123";
@@ -1005,7 +1005,7 @@ function enviarWhatsApp(agendamento, confirmacao = true) {
                   `Atenciosamente,%0A*Kátia Manicure e Pedicure*`;
     }
     
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensagem}`;
+    const url = `https://wa.me/${telefone}?text=${mensagem}`;
     window.open(url, '_blank');
 }
 
@@ -1171,14 +1171,11 @@ function atualizarTabelaAgendamentos() {
 
 async function confirmarAgendamento(id) {
     console.log('Confirmando agendamento ID:', id);
-    console.log('Tipo do ID:', typeof id);
     
     // CORREÇÃO: Converter ID para string para garantir a comparação
     const idString = id.toString();
-    console.log('IDs disponíveis:', agendamentos.map(a => ({ id: a.id, tipo: typeof a.id })));
     
     const agendamento = agendamentos.find(a => {
-        // CORREÇÃO: Comparar ambos como strings
         const agendamentoId = a.id ? a.id.toString() : '';
         return agendamentoId === idString;
     });
@@ -1194,10 +1191,14 @@ async function confirmarAgendamento(id) {
         // Tentar salvar online
         if (isOnline) {
             try {
-                await atualizarStatusOnline(idString, 'Confirmado');
-                console.log('Status atualizado online');
+                const sucesso = await atualizarStatusOnline(idString, 'Confirmado');
+                if (sucesso) {
+                    console.log('Status atualizado online com sucesso');
+                    mostrarMensagem('Status atualizado no Google Sheets!', 'success');
+                }
             } catch (erro) {
                 console.error('Erro ao salvar online:', erro);
+                mostrarMensagem('Erro ao atualizar Google Sheets, mas salvo localmente.', 'warning');
             }
         }
         
@@ -1210,10 +1211,10 @@ async function confirmarAgendamento(id) {
         mostrarMensagem(`Agendamento de ${agendamento.nome} confirmado! WhatsApp aberto.`, 'success');
     } else {
         console.error('Agendamento não encontrado para ID:', idString);
-        console.error('IDs disponíveis:', agendamentos.map(a => a.id));
         mostrarMensagem('Erro: Agendamento não encontrado', 'error');
     }
 }
+
 
 
 async function alterarStatus(id, novoStatus) {
